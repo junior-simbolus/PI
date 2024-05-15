@@ -10,7 +10,7 @@ from waitress import serve
 
 user_db = "SYSDBA"
 password_db = "masterkey"
-name_db = "192.168.2.5/3050:C:\\Simbolus\Banco\\bSimbolus_Gestor.fdb"
+name_db = "192.168.2.5/3050:C:\\Simbolus\\Banco\\bSimbolus_Gestor.fdb"
 
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
@@ -423,11 +423,11 @@ def aprovar_sol2(id, origem):
    sessao = session.get("uid")
    try:
      sql = "UPDATE DESENVOLVIMENTO SET DES_APROVADO_CLIENTE = 1 WHERE DES_CODIGO = "+str(id)
-     conexao, msg = create_db_connection(user_db, password_db, name_db)
+     conexao = create_db_connection(user_db, password_db, name_db)
      exec_query(conexao, sql)
      conexao.close()
      if str(origem) == "0":
-        return listar2(idCli, sessao, 0)
+        return listar2(idCli, sessao, 99, 0)
      else:
         return jsonify({"code": 200,
                         "mensagem": "ok"})
